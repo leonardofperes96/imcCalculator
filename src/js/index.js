@@ -8,6 +8,7 @@
 const imcForm = document.querySelector('#imcForm');
 const inputPeso = document.querySelector('#inputPeso');
 const inputAltura = document.querySelector('#inputAltura');
+const inputNome = document.querySelector('#inputNome');
 const resultado = document.querySelector('.resultado');
 
 // Funções
@@ -15,6 +16,7 @@ const resultado = document.querySelector('.resultado');
 const calculoImc = (pesoValue, alturaValue) => {
   const calculo = pesoValue / (alturaValue * alturaValue);
   let classificacao;
+  const nameValue = inputNome.value;
 
   if (calculo <= 18.5) {
     classificacao = 'Seu peso está baixo!';
@@ -40,10 +42,11 @@ const calculoImc = (pesoValue, alturaValue) => {
     classificacao = 'Obesidade Grau III';
   }
 
-  resultado.innerHTML = `Seu IMC é : ${calculo} ${classificacao}`;
+  resultado.innerHTML = `<h1>${nameValue}</h1> Seu IMC é : ${calculo} ${classificacao}`;
 
   inputPeso.value = '';
   inputAltura.value = '';
+  inputNome.value = '';
 };
 
 // Eventos
@@ -52,6 +55,8 @@ imcForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const pesoValue = +inputPeso.value;
   const alturaValue = +inputAltura.value;
+
+ 
 
   if ((pesoValue && alturaValue) != 0) {
     calculoImc(pesoValue, alturaValue);
